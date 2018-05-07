@@ -433,6 +433,12 @@ function gutenberg_preload_api_request( $memo, $path ) {
 
 	$response = rest_do_request( $request );
 	if ( 200 === $response->status ) {
+
+		if( ! is_array( $memo ) ) {
+			// make sure $memo is an array
+			$memo = (array) $memo;
+		}
+		
 		$memo[ $path ] = array(
 			'body'    => $response->data,
 			'headers' => $response->headers,
